@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -152,20 +153,40 @@
             padding: 20px;
             text-align: center;
             transition: all 0.3s ease;
-            cursor: pointer;
             position: relative;
         }
+        
+        .platform-card p { text-align: left; }
+        .platform-card h3 { margin-top: 0; }
+        .platform-card .platform-icon { cursor: default; }
 
         .platform-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             border-color: #667eea;
         }
+        
+        /* New style for highlighted windows card */
+        .platform-card.windows-special {
+             background: #f0f4ff;
+             border-color: #6c5ce7;
+        }
 
         .platform-icon {
             font-size: 3em;
             margin-bottom: 10px;
             display: block;
+        }
+        
+        .tech-stack-flow {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border-left: 5px solid #00b894;
         }
 
         .comparison-table {
@@ -606,42 +627,46 @@
             <p>既然目標是「創造一個 Linux 環境」，我們來看看各大平台是怎麼做到的。</p>
             
             <div class="platform-grid">
-                <div class="platform-card" onclick="toggleSolutionInfo('linux-solution')" style="border-color: #28a745;">
+                <div class="platform-card">
                     <span class="platform-icon">🐧</span>
                     <h3>Linux / 雲端 (原生方案)</h3>
-                    <div id="linux-solution" style="display:none; margin-top:15px; text-align:left;">
-                        <p><strong>🚀 實現方式：</strong> 它本身就是 Linux，無需任何轉換。直接在系統上運行 Docker，性能最佳。</p>
-                        <div style="background: #d4edda; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                            <strong>✨ 優勢：</strong> 零轉換成本，原生性能
-                        </div>
-                    </div>
+                    <p><strong>實現方式：</strong> 它本身就是 Linux，無需任何轉換。直接在系統上運行 Docker，性能最佳。</p>
                 </div>
                 
-                <div class="platform-card" onclick="toggleSolutionInfo('macos-solution')">
+                <div class="platform-card">
                     <span class="platform-icon">🍎</span>
                     <h3>macOS (整合方案)</h3>
-                    <div id="macos-solution" style="display:none; margin-top:15px; text-align:left;">
-                        <p><strong>🔧 實現方式：</strong> 安裝 Docker Desktop 後，它會在背景自動、無縫地運行一個輕量且最佳化過的迷你 Linux 虛擬機，專門用來跑 Docker。</p>
-                        <div style="background: #cce5ff; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                            <strong>✨ 優勢：</strong> 完全自動化，使用者無感知
-                        </div>
-                    </div>
+                    <p><strong>實現方式：</strong> 安裝 Docker Desktop 後，它會在背景自動、無縫地運行一個輕量且最佳化過的迷你 Linux 虛擬機，專門用來跑 Docker。</p>
                 </div>
-
-                <!-- NEWLY ADDED & CORRECTED SECTION -->
-                <div class="platform-card" onclick="toggleSolutionInfo('windows-solution')">
+                
+                <div class="platform-card windows-special">
                     <span class="platform-icon">🪟</span>
                     <h3>Windows (升級方案)</h3>
-                    <div id="windows-solution" style="display:none; margin-top:15px; text-align:left;">
-                        <p><strong>🛠️ 實現方式：</strong>透過官方工具 WSL2 (Windows Subsystem for Linux 2)，在 Windows 內部完整地運行一個真正的 Linux 核心。這不是模擬器，性能幾乎和原生一樣好。</p>
-                        <div style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                            <strong>✨ 優勢：</strong> 兼顧 Windows 的日常使用與原生 Linux 的高性能
-                        </div>
-                    </div>
+                    <p><strong>實現方式：</strong> 透過官方工具 WSL2 (Windows Subsystem for Linux 2) 啟用 Linux 核心，並在其中安裝一個完整的 Linux 發行版（如 Ubuntu）。這不是模擬器，性能幾乎和原生一樣好。</p>
                 </div>
-
-            </div> <!-- ✨ FIX: This closing tag was added ✨ -->
+            </div>
             
+            <hr style="margin: 40px 0; border: 1px solid #e2e8f0;">
+
+            <h3>深入 Windows 方案：Ubuntu 在部署中的角色與定位</h3>
+            <p>在 Windows 的最佳實踐中，我們提到了安裝 Ubuntu 這一步，那麼 Ubuntu 究竟扮演什麼角色？</p>
+            
+            <div class="concept-box" style="text-align: left;">
+                <h4><span class="emoji">🎯</span>核心定位：最受歡迎的 Linux 發行版</h4>
+                <p>Ubuntu 是 Linux 家族中最受歡迎、使用者最多的版本之一。當我們泛稱需要「Linux 環境」時，安裝 Ubuntu 就是實現這個目標最直接、最可靠的方式。</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #667eea; margin: 20px 0;">
+                <h4><span class="emoji">🏢</span>在 Windows 上的角色：WSL 內部的「作業系統實體」</h4>
+                <p>Windows 透過 WSL 技術來運行一個真實的 Linux 核心，而 Ubuntu 則是我們選擇安裝在這個核心之上的、一個功能完整的作業系統。</p>
+                <p><strong>類比：</strong> 如果 WSL 是建好的「地基與牆壁」，那麼 Ubuntu 就是工作室的「內部裝修、工具牆與中央作業系統」。</p>
+
+                <h4 style="margin-top: 20px;"><span class="emoji">🔗</span>在技術堆疊中的位置：承上啟下的關鍵基石</h4>
+                <p>Ubuntu 處於一個承上啟下的關鍵位置：它運行在 WSL 提供的 Linux 核心之上，同時又為上層的 Docker 提供了所有必要的運行環境和管理工具。</p>
+                
+                <div class="tech-stack-flow">技術堆疊流程： Windows → WSL (提供核心) → Ubuntu (提供系統環境) → Docker (提供容器平台) → n8n</div>
+            </div>
+
             <div style="text-align: center; margin: 30px 0;">
                 <button class="nav-item" onclick="showChapter('chapter6')" style="display: inline-block;">
                     下一章：總結與你的最終決策 →
@@ -696,10 +721,7 @@
             windows: false,
             macos: false,
             linux: false,
-            cloud: false,
-            'linux-solution': false,
-            'macos-solution': false,
-            'windows-solution': false
+            cloud: false
         };
         const totalChapters = 6;
 
@@ -755,21 +777,6 @@
             }
         }
         
-        // 函数：切换解决方案信息的显示/隐藏状态 (第五章)
-        function toggleSolutionInfo(solutionId) {
-            const infoDiv = document.getElementById(solutionId);
-             if (infoDiv) {
-                platformInfoState[solutionId] = !platformInfoState[solutionId];
-                infoDiv.style.display = platformInfoState[solutionId] ? 'block' : 'none';
-                const card = infoDiv.parentElement;
-                if (platformInfoState[solutionId]) {
-                    card.style.transform = 'scale(1.03)';
-                } else {
-                    card.style.transform = 'scale(1)';
-                }
-            }
-        }
-
         // 函数：更新进度条
         function updateProgressBar() {
             const progressFill = document.getElementById('progressFill');
